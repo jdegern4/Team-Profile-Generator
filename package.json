@@ -1,0 +1,26 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "Generates HTML for your team",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdegern4/Team-Profile-Generator.git"
+  },
+  "author": "Jordan Degerness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdegern4/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/jdegern4/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^9.0.0",
+    "jest": "^28.1.2"
+  }
+}
