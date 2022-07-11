@@ -12,7 +12,7 @@ const getManagerInfo = () => {
         {
             type: 'text',
             name: 'name',
-            message: "What is the employee's name?",
+            message: "What is the manager's name?",
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -188,7 +188,7 @@ const getInternInfo = () => {
     ]).then(info => {
         console.log(info);
         const intern = new Intern(info.name, info.employeeID, info.email, info.school);
-        employeeList.push(Intern);
+        employeeList.push(intern);
         anotherEmployee();
     })
 };
@@ -214,6 +214,7 @@ const anotherEmployee = () => {
         // NO MORE EMPLOYEES TO ADD, SO SEND EMPLOYEE ARRAY TO BE PUBLISHED AS HTML
         } else {
             console.log("Your page is coming soon!");
+            createPage();
         }
     })
 };

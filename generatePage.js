@@ -58,11 +58,11 @@ const internCard = (intern) => {
 
 const shipPage = (employeeList) => {
     for (let i = 0; i < employeeList.length; i++) {
-        if (employeeList[i].getRole() === "Manager") {
+        if (employeeList[i].includes("Manager")) {
             managerCard(employeeList[i]);
-        } else if (employeeList[i].getRole() === "Engineer") {
+        } else if (employeeList[i].includes("Engineer")) {
             engineerCard(employeeList[i]);
-        } else if (employeeList[i].getRole() === "Intern") {
+        } else if (employeeList[i].includes("Intern")) {
             internCard(employeeList[i]);
         }
     }
