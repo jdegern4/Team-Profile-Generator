@@ -6,12 +6,12 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const employeeList = [];
 
-const getInfo = () => {
+const getManagerInfo = () => {
     return inquirer.prompt([
         {
             type: 'text',
             name: 'name',
-            message: 'What is the employee name?',
+            message: "What is the employee's name?",
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -24,7 +24,7 @@ const getInfo = () => {
         {
             type: 'text',
             name: 'employeeID',
-            message: 'What is the employee ID number?',
+            message: "What is the employee's ID number?",
             validate: employeeIDInput => {
                 if (employeeIDInput) {
                     return true;
@@ -48,46 +48,171 @@ const getInfo = () => {
             }
         },
         {
-            type: 'list',
-            name: 'role',
-            message: "What is the employee's role?",
-            choices: ['Manager', 'Engineer', 'Intern'],
-            validate: roleInput => {
-                if (roleInput) {
+            type: 'input',
+            name: 'officeNumber',
+            message: "What is the employee's office number?",
+            validate: officeInput => {
+                if (officeInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's office number!");
+                    return false;
+                }
+            }
+        }
+    ]).then(info => {
+        console.log(info);
+        const manager = new Manager(info.name, info.employeeID, info.email, info.officeNumber);
+        employeeList.push(manager);
+        anotherEmployee();
+    })
+};
+
+const getEngineerInfo = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'name',
+            message: "What is the employee's name?",
+            validate: nameInput => {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log("Please enter the employee's name!");
                     return false;
                 }
             }
-        }])
-};
-
-function init() {
-    getInfo()
-    .then(answers => {
-        let employeeCount = 0;
-        if (answers.role === 'Manager') {
-            getManagerInfo();
-        } else if (answers.role === 'Engineer') {
-            getEngineerInfo();
-        } else if (answers.role === 'Intern') {
-            getInternInfo();
+        },
+        {
+            type: 'text',
+            name: 'employeeID',
+            message: "What is the employee's ID number?",
+            validate: employeeIDInput => {
+                if (employeeIDInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's ID number!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'email',
+            message: "What is the employee's email?",
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's email!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "What is the employee's Github username?",
+            validate: githubInput => {
+                if (githubInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's Github username!");
+                    return false;
+                }
+            }
         }
-    });
+    ]).then(info => {
+        console.log(info);
+        const engineer = new Engineer(info.name, info.employeeID, info.email, info.github);
+        employeeList.push(engineer);
+        anotherEmployee();
+    })
 };
 
-const getManagerInfo = (employee) => {
-    return inquirer.prompt({
-        type: 'input',
-        name: 'officeNumber',
-        message: 'What is your office number?'
+const getInternInfo = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'name',
+            message: "What is the employee's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's name!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'employeeID',
+            message: "What is the employee's ID number?",
+            validate: employeeIDInput => {
+                if (employeeIDInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's ID number!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'email',
+            message: "What is the employee's email?",
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's email!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "What is the employee's current school?",
+            validate: schoolInput => {
+                if (schoolInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the employee's current school!");
+                    return false;
+                }
+            }
+        }
+    ]).then(info => {
+        console.log(info);
+        const intern = new Intern(info.name, info.employeeID, info.email, info.school);
+        employeeList.push(Intern);
+        anotherEmployee();
     })
-    .then(({employee, officeNumber}) => {
-        console.log(employee, officeNumber);
-    });
 };
 
 const anotherEmployee = () => {
-    getInfo();
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'role',
+            message: "Do you need to add another employee?",
+            choices: ['Manager', 'Engineer', 'Intern', 'No, all done'],
+        }
+    ])
+    .then(function(response) {
+        console.log(response);
+        if (response.role === 'Manager') {
+            getManagerInfo();
+        } else if (response.role === 'Engineer') {
+            getEngineerInfo();
+        } else if (response.role === 'Intern') {
+            getInternInfo();
+        } else {
+            console.log("Your page is coming soon!");
+        }
+    })
 };
+
+getManagerInfo();
