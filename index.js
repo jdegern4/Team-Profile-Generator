@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const shipPage = require('./generatePage');
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -192,6 +193,7 @@ const getInternInfo = () => {
     })
 };
 
+// CHECK IF ANOTHER EMPLOYEE NEEDS TO BE ADDED
 const anotherEmployee = () => {
     return inquirer.prompt([
         {
@@ -209,10 +211,25 @@ const anotherEmployee = () => {
             getEngineerInfo();
         } else if (response.role === 'Intern') {
             getInternInfo();
+        // NO MORE EMPLOYEES TO ADD, SO SEND EMPLOYEE ARRAY TO BE PUBLISHED AS HTML
         } else {
             console.log("Your page is coming soon!");
         }
     })
 };
 
+const createPage = () => {
+    const pageContents = shipPage(employeeList);
+    fs.writeFile("./dist/index.html", pageContents, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Your HTML can be found in the dist folder");
+        }
+    });
+};
+
 getManagerInfo();
+
+module.exports = employeeList;
