@@ -7,13 +7,13 @@ const managerCard = (manager) => {
     let managerCardHtml = `
     <div class="column card has-background-light">
         <header class="card-header has-background-info has-text-light">
-            ${manager.name}<br>
-            <h3>Manager</h3>
+            <h3 class="ml-2">${manager.name}<br>
+            Manager</h3>
         </header>
       <ul class="has-text-dark">
-        <li>Employee ID: ${manager.employeeID}</li>
-        <li>Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
-        <li>Office Number: ${manager.officeNumber}</li>
+        <li class="ml-2">Employee ID: ${manager.employeeID}</li>
+        <li class="ml-2">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+        <li class="ml-2">Office Number: ${manager.officeNumber}</li>
       </ul>
     </div>
          `;
@@ -24,13 +24,13 @@ const engineerCard = (engineer) => {
     let engineerCardHtml = `
     <div class="column card has-background-light">
         <header class="card-header has-background-info has-text-light">
-            ${engineer.name}<br>
-            <h3>Engineer</h3>
+            <h3 class="ml-2">${engineer.name}<br>
+            Engineer</h3>
         </header>
       <ul class="has-text-dark">
-        <li>Employee ID: ${engineer.employeeID}</li>
-        <li>Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-        <li>Github: <a href="https://www.github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
+        <li class="ml-2">Employee ID: ${engineer.employeeID}</li>
+        <li class="ml-2">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+        <li class="ml-2">Github: <a href="https://www.github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
       </ul>
     </div>
          `;
@@ -41,13 +41,13 @@ const internCard = (intern) => {
     let internCardHtml = `
     <div class="column card has-background-light">
         <header class="card-header has-background-info has-text-light">
-            ${intern.name}<br>
-            <h3>Intern</h3>
+            <h3 class="ml-2">${intern.name}<br>
+            Intern</h3>
         </header>
       <ul class="has-text-dark">
-        <li>Employee ID: ${intern.employeeID}</li>
-        <li>Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
-        <li>School: ${intern.school}</li>
+        <li class="ml-2">Employee ID: ${intern.employeeID}</li>
+        <li class="ml-2">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+        <li class="ml-2">School: ${intern.school}</li>
       </ul>
     </div>
          `;
@@ -57,6 +57,7 @@ const internCard = (intern) => {
 
 
 const shipPage = (employeeList) => {
+    console.log("Testing");
     for (let i = 0; i < employeeList.length; i++) {
         if (employeeList[i].officeNumber) {
             managerCard(employeeList[i]);
@@ -68,7 +69,7 @@ const shipPage = (employeeList) => {
     }
 
     const finalHTML = html.join('');
-    generateFinalPage(finalHTML);
+    return generateFinalPage(finalHTML);
 };
 
 const generateFinalPage = (html) => {
@@ -84,12 +85,14 @@ const generateFinalPage = (html) => {
     </head>
 
     <body>
-        <header>
-            <h1>Our Team</h1>
+        <header class="hero is-link mb-3">
+        <div class="hero-body">
+            <h1 class="hero-title is-size-1 has-text-weight-bold">Our Team</h1>
+        </div>
         </header>
   
         <main>
-            <div class="columns">
+            <div class="columns m-3">
                 ${html}
             </div>
         </main>

@@ -214,13 +214,14 @@ const anotherEmployee = () => {
         // NO MORE EMPLOYEES TO ADD, SO SEND EMPLOYEE ARRAY TO BE PUBLISHED AS HTML
         } else {
             console.log("Your page is coming soon!");
-            createPage();
+            const pageContents = shipPage(employeeList);
+            console.log(pageContents);
+            writeFile(pageContents);
         }
     })
 };
 
-const createPage = () => {
-    const pageContents = shipPage(employeeList);
+const writeFile = (pageContents) => {
     fs.writeFile("./dist/index.html", pageContents, err => {
         if (err) {
             console.log(err);
@@ -231,6 +232,8 @@ const createPage = () => {
     });
 };
 
+// const test = shipPage([{name: 'Jordan', employeeID: 12345, email: 'jordan@email.com', officeNumber: '001'}]);
+// console.log(test);
 getManagerInfo();
 
 module.exports = employeeList;
